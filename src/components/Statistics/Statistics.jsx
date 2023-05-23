@@ -1,5 +1,11 @@
-import List from './List';
-import { Container, NameEvent, StatList } from './Statistics.styled';
+import PropTypes from 'prop-types';
+import {
+  Container,
+  NameEvent,
+  StatList,
+  Item,
+  Label,
+} from './Statistics.styled';
 
 const Statistics = ({ title, stats }) => {
   return (
@@ -7,12 +13,27 @@ const Statistics = ({ title, stats }) => {
       {title !== '' ? <NameEvent>{title}</NameEvent> : ''}
 
       <StatList>
-        {stats.map(el => (
-          <List key={el.id} label={el.label} percentage={el.percentage} />
+        {stats.map(({ id, label, percentage }) => (
+          // <List key={el.id} label={el.label} percentage={el.percentage} />
+          <Item key={id}>
+            <Label>{label}</Label>
+            <span className="percentage">{percentage}%</span>
+          </Item>
         ))}
       </StatList>
     </Container>
   );
+};
+
+Statistics.propTypes = {
+  title: PropTypes.string,
+  stats: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      label: PropTypes.string.isRequired,
+      percentage: PropTypes.number.isRequired,
+    })
+  ),
 };
 
 export default Statistics;
