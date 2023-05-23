@@ -22,7 +22,7 @@ export const TableHeader = styled.th`
 `;
 
 export const TableRows = styled.tr`
-  &:nth-child(2n + 2) {
+  &:nth-of-type(2n + 2) {
     background-color: #dadae1;
   }
 `;
